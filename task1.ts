@@ -5,7 +5,7 @@ function sumOfNumbers(lastNumber: number) {
   for (let startNumber = 0; startNumber <= lastNumber; startNumber++) {
     sum += startNumber;
   }
-  if (!Number.isInteger(lastNumber))  {
+  if (!Number.isInteger(lastNumber)) {
     sumi = sum + lastNumber;
   }
   console.log(sumi);
