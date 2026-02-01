@@ -2,16 +2,33 @@
 // Саму задачу обернуть в отдельную функцию getDate, которая принимает в качестве параметра произвольную дату в формате '2026-10-22T22:10:15'
 //* Проверить валидна ли дата в переданном параметре
 
-const now: Date = new Date();
+function f1(num: number): string {
+  return num.toString().padStart(2, "0");
+}
 
-const day = now.getDate().toString().padStart(2, "0");
-const month = (now.getMonth() + 1).toString().padStart(2, "0");
-const year = now.getFullYear();
+function getDate(dateString?: string): string {
+  let dateToFormat: Date;
 
-const hours = now.getHours().toString().padStart(2, "0");
-const minutes = now.getMinutes().toString().padStart(2, "0");
-const seconds = now.getSeconds().toString().padStart(2, "0");
+  if (dateString) {
+    dateToFormat = new Date(dateString);
 
-const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    if (isNaN(dateToFormat.getTime())) {
+      throw new Error("Неверный формат даты");
+    }
+  } else {
+    dateToFormat = new Date();
+  }
 
-console.log(formattedDate);
+  const day = f1(dateToFormat.getDate());
+  const month = f1(dateToFormat.getMonth() + 1);
+  const year = f1(dateToFormat.getFullYear());
+
+  const hours = f1(dateToFormat.getHours());
+  const minutes = f1(dateToFormat.getMinutes());
+  const seconds = f1(dateToFormat.getSeconds());
+
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
+
+console.log(getDate());
+//console.log("Произвольная дата:", getDate('2026-10-22T22:10:15'));
